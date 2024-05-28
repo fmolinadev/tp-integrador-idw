@@ -1,0 +1,26 @@
+footer {
+  display: fixed;
+  background-color: var(--main-color-dark);
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+}
+
+.footer_container_section {
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+  justify-content: center;
+  margin: auto;
+  width: 90%;
+  height: 100%;
+}
+
+.footer_container_section span {
+  display: flex;
+  font-family: "Inter", sans-serif;
+  color: var(--white);
+  text-align: center;
+  vertical-align: middle;
+}
