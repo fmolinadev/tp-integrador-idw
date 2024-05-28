@@ -1,0 +1,44 @@
+.header_container_main {
+  display: flex;
+  background-color: var(--main-color-dark);
+  height: 60px;
+}
+
+.header_container_section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  vertical-align: middle;
+  margin: auto;
+  width: 90%;
+}
+
+.header_branding {
+  color: var(--white);
+  font-size: 28px;
+  font-weight: 800px;
+  font-family: "Inter", sans-serif;
+}
+
+.header_navbar_container ul {
+  display: inline-flex;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Inter", sans-serif;
+}
+
+.header_navbar_container ul li {
+  color: var(--white);
+  text-decoration: none;
+  padding: 2px 13px;
+}
+
+.header_navbar_container ul li a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+}
+
+.header_navbar_container ul li:hover a {
+  color: var(--main-details-up);
+}
