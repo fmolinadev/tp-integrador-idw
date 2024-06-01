@@ -1,7 +1,16 @@
-import React from "react";
+import React from 'react';
+import HeroContact from './Components/HeroContact';
+import ContactForm from './Components/Form';
+import styles from './contact.module.css';
 
-function ContactPage() {
-  return <div>Contact Page</div>;
-}
+const ContactPage = () => {
+  
+  return (
+    <section id={styles.contacto}>
+      <HeroContact />
+      <ContactForm />
+    </section>
+  );
+};
 
 export default ContactPage;
