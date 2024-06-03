@@ -1,0 +1,63 @@
+.main_container {
+  width: 100%;
+}
+
+.main_container_hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  vertical-align: middle;
+  position: relative;
+  height: 310px;
+  background-image: url("../../assets/img/fondo_turismo_1.jpg");
+  background-size: cover;
+}
+
+.main_container_hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 0; /* Asegura que el fondo oscuro esté detrás del contenido */
+}
+
+.main_section_text {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  height: 120px;
+  vertical-align: middle;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.main_section_text h3,
+.main_section_text p {
+  font-family: "Inter", sans-serif;
+  color: var(--white);
+  font-weight: 500;
+}
+
+.main_section_text h3 {
+  font-size: 29px;
+  font-weight: 700;
+}
+
+.main_section_text p {
+  font-size: 19px;
+}
+
+.main_section_search {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
