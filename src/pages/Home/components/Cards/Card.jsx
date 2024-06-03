@@ -1,10 +1,13 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styles from "./cards.module.css";
-
 import PlaceholderPicture from "../../../../assets/img/placeholder_pictures.jpg";
-import ViewText from "./ViewText";
-import { ButtonAction } from "../../../../components";
+import {
+  ButtonAction,
+  ViewLateralNumber,
+  ViewLateralText,
+} from "../../../../components";
+import ROUTES_PATHS from "../../../../routes/routesPath";
 
 const Card = ({ dataCard }) => {
   return (
@@ -28,22 +31,22 @@ const Card = ({ dataCard }) => {
         </h3>
 
         <div>
-          <ViewText
+          <ViewLateralNumber
             dataText="Dormitorios:"
-            valueText={dataCard.CantidadDormitorios}
+            valueNumber={dataCard.CantidadDormitorios}
           />
-          <ViewText
+          <ViewLateralNumber
             dataText="Cant. de Baños:"
-            valueText={dataCard.CantidadBanios}
+            valueNumber={dataCard.CantidadBanios}
           />
-          <ViewText
+          <ViewLateralNumber
             dataText="Precio:"
-            valueText={"$" + dataCard.PrecioPorDia}
+            valueNumber={"$" + dataCard.PrecioPorDia}
           />
-          <ViewText dataText="Estado:" valueText={dataCard.Estado} />
+          <ViewLateralText dataText="Estado:" valueText={dataCard.Estado} />
         </div>
       </div>
-      <Link to={`/detail/${dataCard.idAlojamiento}`}>
+      <Link to={`${ROUTES_PATHS.baseDetail}${dataCard.idAlojamiento}`}>
         <ButtonAction message="Ver detalles" />
       </Link>
     </article>

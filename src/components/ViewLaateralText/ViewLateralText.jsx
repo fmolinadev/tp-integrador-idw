@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import styles from "./cards.module.css";
+import styles from "./text.module.css";
 
-const ViewText = ({ dataText, valueText }) => {
+const ViewLateralText = ({ dataText, valueText }) => {
   return (
     <div className={styles.card_text_horizontal}>
       <b>{dataText}</b>
@@ -10,9 +10,9 @@ const ViewText = ({ dataText, valueText }) => {
   );
 };
 
-ViewText.propTypes = {
+ViewLateralText.propTypes = {
   dataText: PropTypes.string,
-  valueText: PropTypes.string | PropTypes.number,
+  valueText: PropTypes.string,
 };
 
-export default ViewText;
+export default ViewLateralText;
