@@ -8,6 +8,7 @@ import {
   ContactPage,
   AboutPage,
   AdminPage,
+  DetailPage,
 } from "./pages/index";
 
 function App() {
@@ -19,7 +20,12 @@ function App() {
           <Route path={ROUTES_PATHS.contact} element={<ContactPage />} />
           <Route path={ROUTES_PATHS.about} element={<AboutPage />} />
           <Route path={ROUTES_PATHS.admin} element={<AdminPage />} />
+          <Route path={ROUTES_PATHS.detail} element={<DetailPage />} />
           <Route path={ROUTES_PATHS.error} element={<Page404 />} />
+          <Route
+            path={ROUTES_PATHS.root}
+            element={<Navigate to={ROUTES_PATHS.home} />}
+          />
           <Route path="*" element={<Navigate to={ROUTES_PATHS.error} />} />
         </Route>
       </Routes>
