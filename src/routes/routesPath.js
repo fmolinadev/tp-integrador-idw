@@ -5,6 +5,7 @@ const ROUTES_PATHS = {
   contact: "/contact",
   about: "/about",
   admin: "/admin",
+  detail: "/detail/:id",
   error: "/404",
 };
 
