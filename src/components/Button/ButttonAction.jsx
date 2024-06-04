@@ -5,7 +5,11 @@ import styles from "./button.module.css";
 const ButtonAction = ({ className, message, disabled, actionHandler }) => {
   return (
     <button
-      className={styles.button_action_container}
+      className={
+        disabled
+          ? styles.button_action_container_disabled
+          : styles.button_action_container
+      }
       disabled={disabled}
       onClick={actionHandler}
     >
