@@ -8,6 +8,7 @@ import useFormSubmit from "../../../utils/useFormSubmit.js";
 import isValidEmail from "../../../utils/validateEmail.js";
 import styles from "../contact.module.css";
 
+
 const ContactForm = () => {
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
@@ -36,14 +37,9 @@ const ContactForm = () => {
     );
   }, [fullname, email, subject, message]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (activeSubmit) {
-      document.getElementById("sendForm").submit();
-    }
-  };
+  
 
-  useFormSubmit();
+  useFormSubmit(); 
 
   return (
     <section id="contacto">
@@ -111,7 +107,7 @@ const ContactForm = () => {
                 styles[activeSubmit ? "btn-enviar" : "btn-enviar-disabled"]
               }
               disabled={!activeSubmit}
-              actionHandler={handleSubmit}
+              //actionHandler={handleSubmit}
             />
           </div>
         </form>

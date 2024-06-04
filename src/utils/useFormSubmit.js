@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import swal from 'sweetalert2';
+import  styles from '../pages/Contact/contact.module.css';
 
 const useFormSubmit = () => {
   useEffect(() => {
@@ -19,7 +20,11 @@ const useFormSubmit = () => {
         swal.fire({
           title: 'Gracias por contactarnos',
           text: 'Pronto nos pondremos en contacto contigo',
-          icon: 'success'
+          icon: 'success',
+          customClass: {
+          confirmButton: styles['swal2-confirm']
+          },
+          buttonsStyling: false,
         });
       }
     };

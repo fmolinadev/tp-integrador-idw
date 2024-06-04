@@ -114,3 +114,19 @@
 .mi-contenido {
     color: var(--black) 
 }
+
+.swal2-confirm {
+    background-color: rgb(237, 148, 85); 
+    border: none;
+    border-radius: 15px;
+    color: rgb(255, 255, 255);
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .swal2-confirm:hover {
+    background-color:  rgb(255, 187, 112);
+  }
+  .swal2-confirm:focus {
+    box-shadow: none;
+  }
