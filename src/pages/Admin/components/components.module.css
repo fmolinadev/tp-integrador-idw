@@ -1,0 +1,123 @@
+.aside_container {
+  width: 280px;
+  border-radius: 12px;
+  border: 1px solid rgb(165, 165, 165);
+  height: 100%;
+  min-height: 500px;
+}
+
+.admin_actions_container {
+  width: 940px;
+  border-radius: 12px;
+  border: 1px solid rgb(165, 165, 165);
+  height: 100%;
+  min-height: 500px;
+}
+
+.panel_title {
+  font-size: 20px;
+  font-weight: 500;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 15px;
+  color: var(--main-color-dark);
+}
+
+.list_container {
+  padding-left: 15px;
+  vertical-align: middle;
+}
+
+.list_container li {
+  display: flex;
+  flex-direction: row;
+  vertical-align: middle;
+  justify-content: flex-start;
+  margin: auto;
+  height: 32px;
+  text-decoration: none;
+  list-style: none;
+  gap: 6px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  align-items: center;
+  font-size: 17px;
+}
+
+.list_container li:hover {
+  cursor: pointer;
+}
+
+.container_placement {
+  padding: 20px;
+}
+
+.inputs_admins {
+  width: 100%;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  border: 1px solid var(--main-color-dark);
+}
+
+.inputs_admins_error {
+  width: 100%;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  border: 1px solid red;
+}
+
+.input_container_with {
+  width: 450px;
+  padding-bottom: 12px;
+}
+
+.action_title {
+  font-size: 26px;
+  font-family: 500;
+}
+
+.ul_columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 6px;
+  padding-top: 20px;
+}
+
+.ul_columns > li {
+  list-style-type: none;
+}
+
+.ul_columns > li:hover {
+  list-style-type: none;
+  color: var(--main-color-dark);
+  cursor: pointer;
+}
+
+.display_inpui_horizontal {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  vertical-align: middle;
+  align-items: center;
+}
+
+.text_default_container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  padding: 20px;
+}
+
+.default_title {
+  font-size: 31px;
+  font-family: 500;
+}
+
+.default_subtitle {
+  font-size: 25px;
+  font-family: 400;
+}
