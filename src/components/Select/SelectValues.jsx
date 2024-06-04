@@ -6,11 +6,12 @@ const SelectValues = ({
   changevalue,
   options,
   defaultMessage,
+  className,
 }) => {
   return (
     <select
       name={name}
-      className={styles.select_container}
+      className={className !== "" ? className : styles.select_container}
       value={value !== null ? value : ""}
       onChange={(e) => changevalue(e.target.value)}
     >

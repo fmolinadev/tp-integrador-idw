@@ -16,3 +16,18 @@
   background-color: var(--main-details-up);
   color: vaR(--black);
 }
+
+.button_action_container_disabled {
+  font-family: "Inter", sans-serif;
+  width: 120px;
+  opacity: 0.3;
+  cursor: not-allowed;
+  height: 30px;
+  margin-right: 6px;
+  border-radius: 10px;
+  padding: 4px 2px;
+  text-align: center;
+  background-color: var(--main-color-dark);
+  color: var(--white);
+  border-color: transparent;
+}
