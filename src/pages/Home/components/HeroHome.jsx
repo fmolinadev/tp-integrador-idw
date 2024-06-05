@@ -73,6 +73,7 @@ const HeroHome = ({
           changevalue={setNumberOfBathrooms}
           options={bathRoomsOptions}
           defaultMessage="Cantidad de baños"
+          className={styles.select_container}
         />
         <SelectValues
           key={"rooms"}
@@ -81,6 +82,7 @@ const HeroHome = ({
           changevalue={setNumberOfRooms}
           options={bedRoomsOptions}
           defaultMessage="Habitaciones"
+          className={styles.select_container}
         />
         <SelectValues
           key={"type"}
@@ -89,6 +91,7 @@ const HeroHome = ({
           changevalue={setAccommodationType}
           options={accomodationsOptions}
           defaultMessage="Tipo de alojamiento"
+          className={styles.select_container}
         />
         <ButtonAction message="Limpiar filtros" actionHandler={clearFilters} />
       </section>
