@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import AsideAdmin from "./AsideAdmin";
 import MainAdmin from "./MainAdmin";
 import styles from "../admin.module.css";
-import { DefineActionInControlAccommodationPlace, DefineActionInControlAccommodationTipes } from "../../../enums/defineAdminAction.enum";
+import { DefineActionInControlAccommodationPlace, DefineActionInControlAccommodationTipes, DefineActionServices } from "../../../enums/defineAdminAction.enum";
 
 const PanelAdmin = () => {
   const [defineActionAccommodationTipes, setDefineActionAccommodationTipes] = useState(
@@ -13,10 +13,14 @@ const PanelAdmin = () => {
     DefineActionInControlAccommodationPlace.DEFECTO
   );
 
+   const [defineActionService, setDefineActionServices] = useState(
+    DefineActionServices.DEFECTO
+  );
+
   return (
     <div className={styles.admin_main_container}>
-      <AsideAdmin defineActionType={setDefineActionAccommodationTipes} defineActionPlace={setDefineActionAccommodationPlace} />
-      <MainAdmin actionViewType={defineActionAccommodationTipes} actionViewPlace={defineActionAccommodationPlace} />
+      <AsideAdmin defineActionType={setDefineActionAccommodationTipes} defineActionPlace={setDefineActionAccommodationPlace} defineActionService={setDefineActionServices}  />
+      <MainAdmin actionViewType={defineActionAccommodationTipes} actionViewPlace={defineActionAccommodationPlace} avtionService={defineActionService} />
     </div>
   );
 };

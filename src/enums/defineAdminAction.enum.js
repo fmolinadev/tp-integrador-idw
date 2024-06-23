@@ -14,3 +14,11 @@ export const DefineActionInControlAccommodationPlace = {
   DELETE: "Borrar",
   DEFECTO: "Default",
 };
+
+export const DefineActionServices = {
+  NEW: "Crear",
+  VIEW: "Ver",
+  EDIT: "Editar",
+  DELETE: "Borrar",
+  DEFECTO: "Default",
+};

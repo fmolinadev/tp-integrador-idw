@@ -1,11 +1,11 @@
-import { DefineActionInControlAccommodationTipes, DefineActionInControlAccommodationPlace } from "../../../enums/defineAdminAction.enum";
-import { AddNewPlace, AddNewType, DefaultAction, DeleteOneType, PutOneType, ViewAllPlaces, ViewAllTypes } from "./actions";
+import { DefineActionInControlAccommodationTipes, DefineActionInControlAccommodationPlace, DefineActionServices } from "../../../enums/defineAdminAction.enum";
+import { AddNewPlace, AddNewService, AddNewType, DefaultAction, DeleteOneService, DeleteOneType, PutOneService, PutOneType, ViewAllPlaces, ViewAllServices, ViewAllTypes } from "./actions";
 
 import styles from "./components.module.css";
 
-const MainAdmin = ({ actionViewType, actionViewPlace }) => {
+const MainAdmin = ({ actionViewType, actionViewPlace, avtionService }) => {
   return (
-    <section className={styles.admin_actions_container}>
+     <section className={styles.admin_actions_container}>
       {actionViewType === DefineActionInControlAccommodationTipes.VIEW ? (
         <ViewAllTypes />
       ) : actionViewType === DefineActionInControlAccommodationTipes.NEW ? (
@@ -18,6 +18,14 @@ const MainAdmin = ({ actionViewType, actionViewPlace }) => {
         <AddNewPlace />
       ) : actionViewPlace === DefineActionInControlAccommodationPlace.VIEW ? (
         <ViewAllPlaces />
+      ) : avtionService === DefineActionServices.NEW ? (
+        <AddNewService />
+      ) : avtionService === DefineActionServices.EDIT ? (
+        <PutOneService />
+      ) : avtionService === DefineActionServices.DELETE ? (
+        <DeleteOneService />
+      ) : avtionService === DefineActionServices.VIEW ? (
+        <ViewAllServices />
       ) : (
         <DefaultAction />
       )}
