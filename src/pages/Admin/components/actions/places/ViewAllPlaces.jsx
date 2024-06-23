@@ -8,6 +8,7 @@ import ViewDetailsModal from "../../viewDetailModal/ViewDetailsModal";
 import { ButtonAction, SelectValues } from "../../../../../components";
 import { filterLodgings } from "../../../../../utils/filteredResults";
 import { getAllTypesAccommodations } from "../../../../../services/tiposDeAlojamientos/getAll.tiposDeAlojamientos.services";
+import { getAllImages } from "../../../../../services/imagenes/getAll.images.services";
 
 const ViewAllPlaces = () => {
   const [accomodationsTypes, setAccomodationsTypes] = useState([]);
@@ -24,13 +25,25 @@ const ViewAllPlaces = () => {
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 
-  const handleGetAllAcommodations = async () => {
+ const handleGetAllAccommodations = async () => {
     setLoadingState(StatusRequestEnum.LOADING);
     try {
       const lodgings = await getAllLodgings();
-      if (lodgings) {
-        setAccomodationsOptions(lodgings);
+      const images = await getAllImages();
+
+      if (lodgings && images) {
+        const lodgingsWithImages = lodgings.map(lodging => {
+          const image = images.find(img => img.idAlojamiento === lodging.idAlojamiento);
+          return {
+            ...lodging,
+            Imagen: image ? image.RutaArchivo : null,
+          };
+        });
+
+        setAccomodationsOptions(lodgingsWithImages);
         setLoadingState(StatusRequestEnum.SUCCESS);
+      } else {
+        setLoadingState(StatusRequestEnum.ERROR);
       }
     } catch (error) {
       setLoadingState(StatusRequestEnum.ERROR);
@@ -39,7 +52,7 @@ const ViewAllPlaces = () => {
   };
 
   useEffect(() => {
-    handleGetAllAcommodations();
+    handleGetAllAccommodations();
   }, [modalIsOpen]);
 
   useEffect(() => {

@@ -38,7 +38,7 @@ const AllCardsSmall = ({ AllAccommodations, openModal,setselectedForDetails }) =
               <CardSmall key={index} dataCard={accommodation} openModal={openModal} setselectedForDetails={setselectedForDetails} />
             ))
           ) : (
-            <p>No hay tipos de alojamientos creados</p>
+            <p>No hay resultados para mostrar</p>
           )}
         </div>
         <div className={styles.paginate_container}>

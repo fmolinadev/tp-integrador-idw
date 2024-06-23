@@ -1,34 +1,120 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from "prop-types";
-import { getAllTypesAccommodations } from '../../../../services/tiposDeAlojamientos/getAll.tiposDeAlojamientos.services';
-import { ButtonAction } from '../../../../components';
 import Swal from 'sweetalert2';
+import { getAllTypesAccommodations } from '../../../../services/tiposDeAlojamientos/getAll.tiposDeAlojamientos.services';
+import { ButtonAction, InputTextValues } from '../../../../components';
 import { deleteOneAccommodation } from '../../../../services/alojamientos/delete.alojamiento.services';
 import { putAccommodation } from '../../../../services/alojamientos/put.alojamiento.services';
-
+import PlaceholderPicture from "../../../../assets/img/placeholder_pictures.jpg"
+import styles from "../components.module.css"
+import { validateUrl } from '../../../../utils/validateURL';
+import { createNewImage } from '../../../../services/imagenes/add.images.services';
+import { deleteImage } from '../../../../services/imagenes/delete.imagens.services';
 
 
 const ViewDetailsModal = ({ details, idSelected,setselectedForDetails, closeModal }) => {
   const [accomodationsOptions, setAccomodationsOptions] = useState([]);
   const [typeAccommodation, setTypeAccommodation] = useState("");
-
-
   const [haveEdited, setHaveEdited] = useState(false);
   const [newTitle, setNewTitle] = useState(details.Titulo);
   const [newPrice, setNewPrice] = useState(details.PrecioPorDia);
   const [newStatus, setNewStatus] = useState(details.Estado);
+  const [viewInputImage, setViewInputImage] = useState(false)
 
-    // Handler para el cambio de título
+ const [urlImage, setUrlImage] = useState("");
+  const [isValidUrl, setIsValidUrl] = useState(true);
+
+
+const [imageFromRespoonse, setImageFromResponse] = useState();
+
+
+  const newImageAdd = {
+    idAlojamiento: details.idAlojamiento,
+    RutaArchivo: urlImage
+}
+
+  useEffect(() => {
+    if (urlImage !== "") {
+      setIsValidUrl(validateUrl(urlImage));
+    } else {
+      setIsValidUrl(true);
+    }
+  }, [urlImage]);
+
+
+  const handleViewAddImage = () => {
+    setViewInputImage(!viewInputImage)
+  }
+
+  const handleSubmitImage = async () => {
+      if (urlImage !== "" && isValidUrl) {
+       const dataReponse = await createNewImage(newImageAdd);
+       if (dataReponse !== null) {
+        setIsValidUrl(true)
+        setUrlImage("")
+        setImageFromResponse(dataReponse.RutaArchivo)
+        setViewInputImage(!viewInputImage)
+        Swal.fire({
+          title: "Éxito",
+          text: "Imagen guardada correctaamente.",
+          icon: "success",
+        });
+      }  else {
+          Swal.fire({
+          title: "Error",
+          text: "Error al guardar la imagen.",
+          icon: "success",
+        });
+      }
+    }
+  }
+
+    const handleDeleteImage = async () => {
+     const result = await Swal.fire({
+        title: "Deseas eliminar la iamgen?",
+        showCancelButton: true,
+        confirmButtonText: "Sí, eliminar",
+        denyButtonText: "No, cancelar",
+      });
+
+      if (result.isConfirmed) {
+        try {
+          const dataType = await deleteImage(
+            details.idAlojamiento
+          );
+          if (dataType) {
+            
+            Swal.fire({
+              title: "Éxito",
+              text: "La imagen eliminó correctamente.",
+              icon: "success",
+            });
+          }
+        } catch (error) {
+          Swal.fire({
+            title: "Error",
+            text: "Hubo un problema al eliminar la imagen.",
+            icon: "error",
+          });
+        }
+      } else if (result.isDenied) {
+        Swal.fire("Cambios no guardados", "", "info");
+      }
+      
+    
+  }
+
+
   const handleTitleChange = (e) => {
     setNewTitle(e.target.value);
   };
 
-  // Handler para el cambio de precio
+
   const handlePriceChange = (e) => {
-    setNewPrice(e.target.value); // Puedes necesitar convertir el valor a número según tus necesidades
+    setNewPrice(e.target.value); 
   };
 
-  // Handler para el cambio de estado
+
   const handleStatusChange = (e) => {
     setNewStatus(e.target.value);
   };
@@ -63,8 +149,6 @@ const ViewDetailsModal = ({ details, idSelected,setselectedForDetails, closeModa
   const handleSubmitEdit = async ()  =>{
 
     const putResponse = await putAccommodation( details.idAlojamiento, valuesEdited)
-
-    console.log(putResponse)
 
     if (putResponse.message !== null) {
        setHaveEdited(false)
@@ -136,17 +220,39 @@ const ViewDetailsModal = ({ details, idSelected,setselectedForDetails, closeModa
     <div>
       {details !== null ? (
         <article>
-            <div>
-                <div>
-                <figure>
-                {/* <img
-                    className={styles.card_cover_image}
-                    src={PlaceholderPicture}
-                    alt="pictures"
-                    /> */}
-            </figure>
-            <div>
-                <div>
+            <div >
+              <div className={styles.details_placement_card}>
+                  
+                 <div className={styles.action_picture_container}>
+                   <img
+                      className={styles.image_details_card}
+                      src={ details.Imagen !== null? details.Imagen : imageFromRespoonse !== ""?imageFromRespoonse  : PlaceholderPicture}
+                      alt="pictures"
+                      /> 
+                     {viewInputImage ? (
+                  <div>
+                      <InputTextValues
+                      type={"url"}
+                      name="url"
+                      placeholder="Inserta la URL de la imagen"
+                      className={styles[!isValidUrl ? "inputs_image_error" : "inputs_image"]}
+                      required={true}
+                      error={!isValidUrl}
+                      errorMesagge={"Debes ingresar una url válida."}
+                      value={urlImage}
+                      changevalue={setUrlImage}
+                    />
+                    <ButtonAction message={"Guardar imagen"} disabled={urlImage.length<6} actionHandler={()=>handleSubmitImage()} />
+                  </div>
+                ) :  <div className={styles.button_containers}>
+                      <button  disabled={haveEdited === true} onClick={handleViewAddImage} className={ haveEdited === true ? styles.button_action_disabled_images : styles.button_action_images}>{details.Imagen !== null? "Editar imagen": "Agregar imagen"}</button>
+                      <button disabled={details.Imagen === null || haveEdited === true}  className={ details.Imagen === null || haveEdited === true ?styles.button_action_disabled_images: styles.button_action_images} onClick={handleDeleteImage}>Quitar imagen </button>
+                    </div>}
+                    
+                 </div>
+                 
+            <div className={styles.action_picture_container}>
+                <div className={styles.describe_values_container}>
                     <b>Titulo:</b>
                      <input
                         type="text"
@@ -166,26 +272,26 @@ const ViewDetailsModal = ({ details, idSelected,setselectedForDetails, closeModa
                     />
                 
                 </div>
-                <div>
+                <div className={styles.describe_values_container}>
                     <b>Descripción:</b>
                     {details.Descripcion}
                 </div>
-                <div>
+                <div className={styles.describe_values_container}>
                     <b>Tipo:</b>
                     {typeAccommodation}
                 </div>
             </div>
             </div>
-            <div>
-                <div>
+            <div className={styles.describe_values_iinputs }>
+                <div className={styles.describe_values_iinputs }>
                     <b>Dormitorios:</b>
                     {details.CantidadDormitorios}
             </div>
-            <div>
+            <div className={styles.describe_values_container}>
                 <b>Cant. de Baños:</b>
                 {details.CantidadBanios}
             </div>
-            <div>
+            <div className={styles.describe_values_container}>
                 <b>Precio:</b>
                 <input
                         type="number"
@@ -204,10 +310,11 @@ const ViewDetailsModal = ({ details, idSelected,setselectedForDetails, closeModa
                         }}
                     />
             </div>
-            <div>
+            <div  className={styles.describe_values_container}>
                 <b>Estado:</b>
                 {haveEdited ? (
-                <select
+                <div >
+                  <select
                     value={newStatus}
                     onChange={handleStatusChange}
                     style={{
@@ -221,6 +328,7 @@ const ViewDetailsModal = ({ details, idSelected,setselectedForDetails, closeModa
                     <option value="Disponible">Disponible</option>
                     <option value="Reservado">Reservado</option>
                 </select>
+                </div>
                 ) : (
                 <input
                     type="text"

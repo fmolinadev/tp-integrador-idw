@@ -6,6 +6,7 @@ import { getDetailsForOneLodgings } from "../../services/alojamientos/getDetail.
 import { ButtonAction } from "../../components";
 import ViewDetails from "./components/ViewDetails";
 import styles from "./details.module.css";
+import { getAllImages } from "../../services/imagenes/getAll.images.services";
 
 function DetailPage() {
   const { id } = useParams();
@@ -15,10 +16,18 @@ function DetailPage() {
   const handleLoadingDetail = async (id) => {
     try {
       setStatusRequest(StatusRequestEnum.LOADING);
-      const res = await getDetailsForOneLodgings(id);
 
-      if (res) {
-        setDetailBooking(res);
+      const lodgingDetail = await getDetailsForOneLodgings(id);
+      const images = await getAllImages();
+
+      if (lodgingDetail && images) {
+        const image = images.find(img => img.idAlojamiento === lodgingDetail.idAlojamiento);
+        const lodgingDetailWithImage = {
+          ...lodgingDetail,
+          Imagen: image ? image.RutaArchivo : null,
+        };
+
+        setDetailBooking(lodgingDetailWithImage);
         setStatusRequest(StatusRequestEnum.SUCCESS);
       } else {
         setStatusRequest(StatusRequestEnum.ERROR);

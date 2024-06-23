@@ -5,6 +5,7 @@ import styles from "./home.module.css";
 import HeroHome from "./components/HeroHome";
 import AllCards from "./components/Cards/AllCards";
 import { filterLodgings } from "../../utils/filteredResults";
+import { getAllImages } from "../../services/imagenes/getAll.images.services";
 
 function HomePage() {
   const [allLodgings, setAllLodgings] = useState([]);
@@ -14,13 +15,23 @@ function HomePage() {
   const [numberOfRooms, setNumberOfRooms] = useState(null);
   const [accommodationType, setAccommodationType] = useState(null);
 
-  const handleLoading = async () => {
+ const handleLoading = async () => {
     try {
       setStatusRequest(StatusRequestEnum.LOADING);
-      const res = await getAllLodgings();
 
-      if (res) {
-        setAllLodgings(res);
+      const lodgings = await getAllLodgings();
+      const images = await getAllImages();
+
+      if (lodgings && images) {
+        const lodgingsWithImages = lodgings.map(lodging => {
+          const image = images.find(img => img.idAlojamiento === lodging.idAlojamiento);
+          return {
+            ...lodging,
+            Imagen: image ? image.RutaArchivo : null,
+          };
+        });
+
+        setAllLodgings(lodgingsWithImages);
         setStatusRequest(StatusRequestEnum.SUCCESS);
       } else {
         setStatusRequest(StatusRequestEnum.ERROR);

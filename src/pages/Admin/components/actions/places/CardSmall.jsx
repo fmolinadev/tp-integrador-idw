@@ -53,7 +53,7 @@ const CardSmall = ({ dataCard, openModal, setselectedForDetails }) => {
         <figure className={styles.cardsmall_cover_container}>
           <img
             className={styles.cardsmall_cover_image}
-            src={PlaceholderPicture}
+            src={dataCard.Imagen !== null? dataCard.Imagen:PlaceholderPicture}
             alt="pictures"
           />
         </figure>
@@ -70,6 +70,7 @@ const CardSmall = ({ dataCard, openModal, setselectedForDetails }) => {
 CardSmall.propTypes = {
   dataCard: PropTypes.shape({
     Titulo: PropTypes.string.isRequired,
+    Imagen: PropTypes.string,
     idAlojamiento: PropTypes.number.isRequired,
     Estado: PropTypes.string.isRequired,
     Descripcion: PropTypes.string.isRequired,
