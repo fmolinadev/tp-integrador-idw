@@ -15,6 +15,8 @@ const AsideAdmin = ({ defineActionType, defineActionPlace,defineActionService })
 
     const handlerDefineService = (id) => {
     defineActionService(id);
+     defineActionType(DefineActionInControlAccommodationTipes.DEFECTO)
+     defineActionPlace(DefineActionInControlAccommodationPlace.DEFECTO)
     
    
   };
