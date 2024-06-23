@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import { getAllTypesAccommodations } from "../../../../services/tiposDeAlojamientos/getAll.tiposDeAlojamientos.services";
-import { ButtonAction, SelectValues } from "../../../../components";
-import styles from "../components.module.css";
-import { deleteOneTypesAccommodations } from "../../../../services/tiposDeAlojamientos/delete.tipoDeALojamiento";
+import { getAllTypesAccommodations } from "../../../../../services/tiposDeAlojamientos/getAll.tiposDeAlojamientos.services";
+import { ButtonAction, SelectValues } from "../../../../../components";
+import { deleteOneTypesAccommodations } from "../../../../../services/tiposDeAlojamientos/delete.tipoDeALojamiento";
+import styles from "../../components.module.css";
 
 const DeleteOneType = () => {
   const [accomodationsOptions, setAccomodationsOptions] = useState([]);

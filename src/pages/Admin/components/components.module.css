@@ -75,6 +75,20 @@
   padding-bottom: 12px;
 }
 
+.input_container_with_create {
+  width: 700px;
+  padding-bottom: 12px;
+}
+
+.input_container_with_create_placement {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  justify-content: center;
+  padding-top: 12px;
+  
+}
+
 .action_title {
   font-size: 26px;
   font-family: 500;
@@ -121,3 +135,17 @@
   font-size: 25px;
   font-family: 400;
 }
+
+.select_container {
+  font-family: "Inter", sans-serif;
+  width: 250px;
+  height: 30px;
+  margin-right: 6px;
+  border-radius: 12px;
+  padding: 4px 2px;
+  text-align: center;
+  color: black;
+  border-color: 1px solid black;
+
+}
+

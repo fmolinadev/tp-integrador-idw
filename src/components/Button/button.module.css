@@ -31,3 +31,23 @@
   color: var(--white);
   border-color: transparent;
 }
+
+.secondary_action{
+   font-family: "Inter", sans-serif;
+  width: 120px;
+  height: 30px;
+  margin-right: 6px;
+  border-radius: 10px;
+  padding: 4px 2px;
+  text-align: center;
+  background-color: var(--main-color-light);
+  color: var(--black);
+  border-color: transparent;
+}
+
+.secondary_action:hover{
+  cursor: pointer;
+  background-color: var( --main-details-down );
+  color: vaR(--black);
+  border-color: transparent;
+}

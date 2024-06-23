@@ -4,7 +4,7 @@ import { BASE_URL } from "../../global.request";
 export const createNewTypesAccommodations = async (newType) => {
   const data = await axiosService.post({
     baseURL: BASE_URL.TIPO_ALOJAMIENTOS,
-    path: "/createTipoAlojamiento",
+    path: "/createAlojamiento",
     data: newType,
   });
 

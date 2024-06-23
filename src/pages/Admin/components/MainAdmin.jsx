@@ -1,27 +1,29 @@
-import { DefineActionInControlAccommodation } from "../../../enums/defineAdminAction.enum";
-import AddNewType from "./actions/AddNewType";
-import DEfaultAction from "./actions/DEfaultAction";
-import DeleteOneType from "./actions/DeleteOneType";
-import PutOneType from "./actions/PutOneType";
-import ViewAllTypes from "./actions/ViewAllTypes";
+import { DefineActionInControlAccommodationTipes, DefineActionInControlAccommodationPlace } from "../../../enums/defineAdminAction.enum";
+import { AddNewPlace, AddNewType, DefaultAction, DeleteOneType, PutOneType, ViewAllPlaces, ViewAllTypes } from "./actions";
+
 import styles from "./components.module.css";
 
-const MainAdmin = ({ actionView }) => {
+const MainAdmin = ({ actionViewType, actionViewPlace }) => {
   return (
     <section className={styles.admin_actions_container}>
-      {actionView === DefineActionInControlAccommodation.VIEW ? (
+      {actionViewType === DefineActionInControlAccommodationTipes.VIEW ? (
         <ViewAllTypes />
-      ) : actionView === DefineActionInControlAccommodation.NEW ? (
+      ) : actionViewType === DefineActionInControlAccommodationTipes.NEW ? (
         <AddNewType />
-      ) : actionView === DefineActionInControlAccommodation.EDIT ? (
+      ) : actionViewType === DefineActionInControlAccommodationTipes.EDIT ? (
         <PutOneType />
-      ) : actionView === DefineActionInControlAccommodation.DELETE ? (
+      ) : actionViewType === DefineActionInControlAccommodationTipes.DELETE ? (
         <DeleteOneType />
+      ) : actionViewPlace === DefineActionInControlAccommodationPlace.NEW ? (
+        <AddNewPlace />
+      ) : actionViewPlace === DefineActionInControlAccommodationPlace.VIEW ? (
+        <ViewAllPlaces />
       ) : (
-        <DEfaultAction />
+        <DefaultAction />
       )}
     </section>
   );
 };
+
 
 export default MainAdmin;

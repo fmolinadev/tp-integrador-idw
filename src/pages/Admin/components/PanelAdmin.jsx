@@ -3,17 +3,20 @@ import React, { useState } from "react";
 import AsideAdmin from "./AsideAdmin";
 import MainAdmin from "./MainAdmin";
 import styles from "../admin.module.css";
-import { DefineActionInControlAccommodation } from "../../../enums/defineAdminAction.enum";
+import { DefineActionInControlAccommodationPlace, DefineActionInControlAccommodationTipes } from "../../../enums/defineAdminAction.enum";
 
 const PanelAdmin = () => {
-  const [defineAction, setDefineAction] = useState(
-    DefineActionInControlAccommodation.DEFECTO
+  const [defineActionAccommodationTipes, setDefineActionAccommodationTipes] = useState(
+    DefineActionInControlAccommodationTipes.DEFECTO
+  );
+  const [defineActionAccommodationPlace, setDefineActionAccommodationPlace] = useState(
+    DefineActionInControlAccommodationPlace.DEFECTO
   );
 
   return (
     <div className={styles.admin_main_container}>
-      <AsideAdmin defineAction={setDefineAction} />
-      <MainAdmin actionView={defineAction} />
+      <AsideAdmin defineActionType={setDefineActionAccommodationTipes} defineActionPlace={setDefineActionAccommodationPlace} />
+      <MainAdmin actionViewType={defineActionAccommodationTipes} actionViewPlace={defineActionAccommodationPlace} />
     </div>
   );
 };
