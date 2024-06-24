@@ -359,7 +359,7 @@ const [imageFromRespoonse, setImageFromResponse] = useState();
                   {details.Servicios !== null ? (
                   details.Servicios.map((servicio, index) => {
                     const service = servicesOptions.find(srv => srv.value === servicio.idServicio);
-                    console.log("SERVICE", service);
+                   
                     return (
                       <div className={styles.container_result_service}>
                         {service ? (
