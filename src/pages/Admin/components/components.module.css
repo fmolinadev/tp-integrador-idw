@@ -159,7 +159,7 @@
   object-fit: cover;
   border-radius: 12px;
   width: 210px;
-  height: 150px;
+  height: 160px;
   margin-right: 12px;
   margin-bottom: 10px;
 }
@@ -170,6 +170,7 @@
   align-items: center;
   vertical-align: middle;
   margin-top: 10px;
+  width: 100%;
 }
 
 .describe_values_iinputs {
@@ -190,6 +191,7 @@
 
 .button_action_images{
   padding: 2px 8px;
+    color: black;
   border-radius: 8px;
   margin: 1px;
   font-weight: 300;
@@ -245,3 +247,42 @@
   border: 1px solid red;
 }
 
+.add_image_container_url{
+  width: 340px;
+
+}
+.container_result_service{
+  display: flex;
+  vertical-align: middle;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn_result_service{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background-color: transparent;
+  border-radius: 12px;
+  color: grey;
+  border: 1px solid var(--main-color-dark);
+}
+
+.btn_result_service:hover{
+  color: red;
+  cursor: pointer;
+  border: 1px solid red;
+}
+
+.input_select_service{
+  width: 190px;
+  font-size: 12px;
+  color: black;
+  padding: 4px 6px;
+  border-radius: 12px;
+  border: 1px solid var(--main-color-dark);
+  margin-top: 5px;
+}

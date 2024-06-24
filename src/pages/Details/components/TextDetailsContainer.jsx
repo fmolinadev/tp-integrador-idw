@@ -71,6 +71,17 @@ const TextDetailsContainer = ({ details }) => {
         />
       </div>
       <br />
+       <div className={styles.details_text_container_placement}>
+        {" "}
+        <p className={styles.details_section_text}>Servicios: </p>
+         {details.Servicios !== null? (
+        details.Servicios.map((servicio, index) => (
+          <p key={index}>{servicio}</p>
+        ))
+      ) : (
+        <p>No se informaron servicios para este alojamiento.</p>
+      )}
+      </div>
       <div className={styles.details_text_container_placement}>
         {" "}
         <p className={styles.details_section_text}>Estado del alojamiento: </p>

@@ -4,4 +4,5 @@ export const BASE_URL = {
   TIPO_ALOJAMIENTOS: "http://localhost:3001/tiposAlojamiento",
   IMAGENES: "http://localhost:3001/imagen",
   SERVICIOS: "http://localhost:3001/servicio",
+  ALOJAMIENTOS_Y_SERVICIOS: "http://localhost:3001/alojamientosServicios",
 };

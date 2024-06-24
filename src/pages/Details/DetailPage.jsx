@@ -7,36 +7,43 @@ import { ButtonAction } from "../../components";
 import ViewDetails from "./components/ViewDetails";
 import styles from "./details.module.css";
 import { getAllImages } from "../../services/imagenes/getAll.images.services";
+import { getAllServiceAndLodgins } from "../../services/alojamientoServicios/getAll.serviciosAlojamiento.services";
 
 function DetailPage() {
   const { id } = useParams();
   const [statusRequest, setStatusRequest] = useState(StatusRequestEnum.IDLE);
   const [detailsBooking, setDetailBooking] = useState(null);
 
-  const handleLoadingDetail = async (id) => {
-    try {
-      setStatusRequest(StatusRequestEnum.LOADING);
+const handleLoadingDetail = async (id) => {
+  try {
+    setStatusRequest(StatusRequestEnum.LOADING);
 
-      const lodgingDetail = await getDetailsForOneLodgings(id);
-      const images = await getAllImages();
+    const lodgingDetail = await getDetailsForOneLodgings(id);
+    const images = await getAllImages();
+    const servicesResponse = await getAllServiceAndLodgins();
 
-      if (lodgingDetail && images) {
-        const image = images.find(img => img.idAlojamiento === lodgingDetail.idAlojamiento);
-        const lodgingDetailWithImage = {
-          ...lodgingDetail,
-          Imagen: image ? image.RutaArchivo : null,
-        };
+    if (lodgingDetail && images && servicesResponse) {
+      const image = images.find(img => img.idAlojamiento === lodgingDetail.idAlojamiento);
+      const servicesFiltered = servicesResponse.filter(srv => srv.idAlojamiento === lodgingDetail.idAlojamiento);
 
-        setDetailBooking(lodgingDetailWithImage);
-        setStatusRequest(StatusRequestEnum.SUCCESS);
-      } else {
-        setStatusRequest(StatusRequestEnum.ERROR);
-      }
-    } catch (error) {
-      console.error("Error al cargar los detalles:", error);
+      const totalServices = servicesFiltered.length > 0 ? servicesFiltered.map(service => service.idServicio) : null;
+      const lodgingDetailWithImageAndServices = {
+        ...lodgingDetail,
+        Imagen: image ? image.RutaArchivo : null,
+        Servicios: totalServices,
+      };
+
+      setDetailBooking(lodgingDetailWithImageAndServices);
+      setStatusRequest(StatusRequestEnum.SUCCESS);
+    } else {
       setStatusRequest(StatusRequestEnum.ERROR);
     }
-  };
+  } catch (error) {
+    console.error("Error al cargar los detalles:", error);
+    setStatusRequest(StatusRequestEnum.ERROR);
+  }
+};
+
 
   useEffect(() => {
     if (id) {

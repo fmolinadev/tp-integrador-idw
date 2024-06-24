@@ -9,6 +9,7 @@ import { ButtonAction, SelectValues } from "../../../../../components";
 import { filterLodgings } from "../../../../../utils/filteredResults";
 import { getAllTypesAccommodations } from "../../../../../services/tiposDeAlojamientos/getAll.tiposDeAlojamientos.services";
 import { getAllImages } from "../../../../../services/imagenes/getAll.images.services";
+import { getAllServiceAndLodgins } from "../../../../../services/alojamientoServicios/getAll.serviciosAlojamiento.services";
 
 const ViewAllPlaces = () => {
   const [accomodationsTypes, setAccomodationsTypes] = useState([]);
@@ -26,30 +27,34 @@ const ViewAllPlaces = () => {
   const closeModal = () => setIsOpen(false);
 
  const handleGetAllAccommodations = async () => {
-    setLoadingState(StatusRequestEnum.LOADING);
-    try {
-      const lodgings = await getAllLodgings();
-      const images = await getAllImages();
+  setLoadingState(StatusRequestEnum.LOADING);
+  try {
+    const lodgings = await getAllLodgings();
+    const images = await getAllImages();
+    const servicesResponse = await getAllServiceAndLodgins();
 
-      if (lodgings && images) {
-        const lodgingsWithImages = lodgings.map(lodging => {
-          const image = images.find(img => img.idAlojamiento === lodging.idAlojamiento);
-          return {
-            ...lodging,
-            Imagen: image ? image.RutaArchivo : null,
-          };
-        });
+    if (lodgings && images && servicesResponse) {
+      const lodgingsWithImagesAndServices = lodgings.map(lodging => {
+        const image = images.find(img => img.idAlojamiento === lodging.idAlojamiento);
+        const servicesFiltered = servicesResponse.filter(srv => srv.idAlojamiento === lodging.idAlojamiento);
+        const totalServices = servicesFiltered.length > 0 ? servicesFiltered.map(service => ({ idServicio: service.idServicio, idAlojamientoServicio: service.idAlojamientoServicio })) : [];
+        return {
+          ...lodging,
+          Imagen: image ? image.RutaArchivo : null,
+          Servicios: totalServices,
+        };
+      });
 
-        setAccomodationsOptions(lodgingsWithImages);
-        setLoadingState(StatusRequestEnum.SUCCESS);
-      } else {
-        setLoadingState(StatusRequestEnum.ERROR);
-      }
-    } catch (error) {
+      setAccomodationsOptions(lodgingsWithImagesAndServices);
+      setLoadingState(StatusRequestEnum.SUCCESS);
+    } else {
       setLoadingState(StatusRequestEnum.ERROR);
-      console.error("Error al cargar los tipos de alojamiento: ", error);
     }
-  };
+  } catch (error) {
+    setLoadingState(StatusRequestEnum.ERROR);
+    console.error("Error al cargar los tipos de alojamiento: ", error);
+  }
+};
 
   useEffect(() => {
     handleGetAllAccommodations();
@@ -110,6 +115,14 @@ const ViewAllPlaces = () => {
     setAccommodationType(null);
   };
 
+  const refreshCurrentDetails = async () => {
+    handleGetAllAccommodations();
+      const updatedDetails = accomodationsOptions.find(
+        option => option.idAlojamiento === selectedForDetails
+      );
+      setCurrentDetails(updatedDetails);
+  };
+
    const filteredLodgings = filterLodgings(
     accomodationsOptions,
     numberOfBathrooms,
@@ -159,7 +172,7 @@ const ViewAllPlaces = () => {
         />
       )}
       <ModalView modalIsOpen={modalIsOpen} closeModal={closeModal} contentLabel="IDW">
-        {currentDetails && <ViewDetailsModal details={currentDetails} idSelected={selectedForDetails} setselectedForDetails={setSelectedForDetails} closeModal={closeModal}/> }
+        {currentDetails && <ViewDetailsModal details={currentDetails} idSelected={selectedForDetails} setselectedForDetails={setSelectedForDetails} closeModal={closeModal} refreshDetails={refreshCurrentDetails}/> }
       </ModalView>
     </div>
   );
