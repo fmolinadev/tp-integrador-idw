@@ -30,7 +30,7 @@ const ViewDetailsModal = ({ details, idSelected,setselectedForDetails, closeModa
   const [isValidUrl, setIsValidUrl] = useState(true);
 
 
-const [imageFromRespoonse, setImageFromResponse] = useState();
+const [imageFromRespoonse, setImageFromResponse] = useState(null);
 
 
   const newImageAdd = {
@@ -265,43 +265,56 @@ const [imageFromRespoonse, setImageFromResponse] = useState();
   }, [accomodationsOptions, details.TipoAlojamiento]);
 
 
-  const handlerDelete = async () => {
-    if (idSelected !== null) {
-      const result = await Swal.fire({
-        title: "Estás por eliminar un alojamiento",
-        showCancelButton: true,
-        confirmButtonText: "Sí, borrar",
-        denyButtonText: "No, cancelar",
-      });
+ const handlerDelete = async () => {
+  if (idSelected !== null) {
+    const result = await Swal.fire({
+      title: "Estás por eliminar un alojamiento",
+      showCancelButton: true,
+      confirmButtonText: "Sí, borrar",
+      denyButtonText: "No, cancelar",
+    });
 
-      if (result.isConfirmed) {
-        try {
-          const dataType = await deleteOneAccommodation(
-            details.idAlojamiento
-          );
-          if (dataType.message.includes("correctamente")) {
-            setselectedForDetails(null);
-            closeModal()
-            Swal.fire({
-              title: "Éxito",
-              text: "El alojamiento se eliminó correctamente.",
-              icon: "success",
-            });
-          }
-          
-        } catch (error) {
-          closeModal()
-          Swal.fire({
-            title: "Error",
-            text: "Hubo un problema al eliminar el alojamiento.",
-            icon: "error",
-          });
+    if (result.isConfirmed) {
+      try {
+        // Verifica que details.idAlojamiento sea válido
+        if (!details.idAlojamiento) {
+          return  Swal.fire({
+          title: "Error",
+          text: "El ID del alojamiento no es válido",
+          icon: "error",
+        });
         }
-      } else if (result.isDenied) {
-        Swal.fire("Cambios no guardados", "", "info");
+
+        // Llama a la función de eliminación
+        const dataType = await deleteOneAccommodation(Number(details.idAlojamiento));    
+        if (dataType.message && dataType.message.includes("correctamente")) {
+          setselectedForDetails(null);
+          closeModal();
+          Swal.fire({
+            title: "Éxito",
+            text: "El alojamiento se eliminó correctamente.",
+            icon: "success",
+          });
+        } else {
+          throw new Error("La respuesta del servidor no fue exitosa");
+        }
+        
+      } catch (error) {
+        console.error("Error al eliminar el alojamiento:", error);
+
+        // Cierra el modal y muestra el error
+        closeModal();
+        Swal.fire({
+          title: "Error",
+          text: "Hubo un problema al eliminar el alojamiento.",
+          icon: "error",
+        });
       }
+    } else if (result.isDenied) {
+      Swal.fire("Cambios no guardados", "", "info");
     }
-  };
+  }
+};
 
    return (
     <div>
@@ -313,7 +326,7 @@ const [imageFromRespoonse, setImageFromResponse] = useState();
                  <div className={styles.action_picture_container}>
                    <img
                       className={styles.image_details_card}
-                      src={ details.Imagen !== null? details.Imagen : imageFromRespoonse !== ""?imageFromRespoonse  : PlaceholderPicture}
+                      src={ details.Imagen !== null? details.Imagen : imageFromRespoonse !== null? imageFromRespoonse  : PlaceholderPicture}
                       alt="pictures"
                       /> 
                   {viewInputImage ? (

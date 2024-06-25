@@ -6,16 +6,33 @@ import HeroHome from "./components/HeroHome";
 import AllCards from "./components/Cards/AllCards";
 import { filterLodgings } from "../../utils/filteredResults";
 import { getAllImages } from "../../services/imagenes/getAll.images.services";
+import { ButtonAction } from "../../components";
 
 function HomePage() {
   const [allLodgings, setAllLodgings] = useState([]);
+  const [filteredLodgings, setFilteredLodgings] = useState([]);
   const [statusRequest, setStatusRequest] = useState(StatusRequestEnum.IDLE);
 
   const [numberOfBathrooms, setNumberOfBathrooms] = useState(null);
   const [numberOfRooms, setNumberOfRooms] = useState(null);
   const [accommodationType, setAccommodationType] = useState(null);
 
- const handleLoading = async () => {
+  const [priceRange, setPriceRange] = useState(null);
+
+  const elementsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const totalPages = Math.ceil(filteredLodgings.length / elementsPerPage);
+
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const handleLoading = async () => {
     try {
       setStatusRequest(StatusRequestEnum.LOADING);
 
@@ -46,11 +63,18 @@ function HomePage() {
     handleLoading();
   }, []);
 
-  const filteredLodgings = filterLodgings(
-    allLodgings,
-    numberOfBathrooms,
-    numberOfRooms,
-    accommodationType
+useEffect(() => {
+  let filtered = filterLodgings(allLodgings, numberOfBathrooms, numberOfRooms, accommodationType, priceRange);
+
+  setFilteredLodgings(filtered);
+  setCurrentPage(1);
+}, [allLodgings, numberOfBathrooms, numberOfRooms, accommodationType, priceRange]);
+
+
+
+  const paginatedLodgings = filteredLodgings.slice(
+    (currentPage - 1) * elementsPerPage,
+    currentPage * elementsPerPage
   );
 
   return (
@@ -69,8 +93,15 @@ function HomePage() {
             setNumberOfRooms={setNumberOfRooms}
             accommodationType={accommodationType}
             setAccommodationType={setAccommodationType}
+            setPriceRange={setPriceRange}
+            priceRange={priceRange}
           />
-          <AllCards results={filteredLodgings} />
+          <AllCards results={paginatedLodgings} />
+          <div className={styles.paginate_container}>
+            <ButtonAction actionHandler={handlePrevPage} disabled={currentPage === 1} message="< Atrás" />
+            <span className={styles.currentPageStyles}>{currentPage}</span>
+            <ButtonAction actionHandler={handleNextPage} disabled={currentPage === totalPages} message="Siguiente >" />
+          </div>
         </>
       )}
     </main>
