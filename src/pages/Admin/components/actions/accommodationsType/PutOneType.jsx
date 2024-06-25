@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import { getAllTypesAccommodations } from "../../../../services/tiposDeAlojamientos/getAll.tiposDeAlojamientos.services";
+import { getAllTypesAccommodations } from "../../../../../services/tiposDeAlojamientos/getAll.tiposDeAlojamientos.services";
 import {
   ButtonAction,
   InputTextValues,
   SelectValues,
-} from "../../../../components";
+} from "../../../../../components";
 
-import { putOneTypesAccommodations } from "../../../../services/tiposDeAlojamientos/put.tipoDeALojamiento";
-import { capitalizeFirstLetter } from "../../../../utils/capitaaalizeFirstLetter";
-import styles from "../components.module.css";
+import { putOneTypesAccommodations } from "../../../../../services/tiposDeAlojamientos/put.tipoDeALojamiento";
+import { capitalizeFirstLetter } from "../../../../../utils/capitaaalizeFirstLetter";
+import styles from "../../components.module.css";
 
 const PutOneType = () => {
   const [accomodationsOptions, setAccomodationsOptions] = useState([]);

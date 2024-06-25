@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { getAllTypesAccommodations } from "../../../../services/tiposDeAlojamientos/getAll.tiposDeAlojamientos.services";
-import styles from "../components.module.css";
+import { getAllTypesAccommodations } from "../../../../../services/tiposDeAlojamientos/getAll.tiposDeAlojamientos.services";
+import styles from "../../components.module.css";
 const ViewAllTypes = () => {
   const [accomodationsOptions, setAccomodationsOptions] = useState([]);
 

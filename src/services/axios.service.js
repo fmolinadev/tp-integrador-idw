@@ -3,6 +3,9 @@ import axios from "axios";
 const createAxiosInstance = (baseURL) => {
   return axios.create({
     baseURL,
+    headers: {
+      'Content-Type': 'application/json',
+    },
   });
 };
 
@@ -19,10 +22,12 @@ const axiosService = {
 
   async post({ baseURL, data, path }) {
     try {
+      
       const axiosInstance = createAxiosInstance(baseURL);
       const response = await axiosInstance.post(path, data);
       return response.data;
     } catch (error) {
+      console.error("Error in axiosService.post:", error);
       throw error;
     }
   },
