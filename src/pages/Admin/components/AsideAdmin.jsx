@@ -1,26 +1,40 @@
 import { AddIcon, DeleteIcon, EditIcon, ListIcon } from "../../../common";
-import { DefineActionInControlAccommodation } from "../../../enums/defineAdminAction.enum";
+import { DefineActionInControlAccommodationPlace, DefineActionInControlAccommodationTipes, DefineActionServices } from "../../../enums/defineAdminAction.enum";
 import styles from "./components.module.css";
 
-const AsideAdmin = ({ defineAction }) => {
-  const handlerDefineAction = (id) => {
-    defineAction(id);
+const AsideAdmin = ({ defineActionType, defineActionPlace,defineActionService }) => {
+
+  const handlerDefineActionType = (id) => {
+    defineActionType(id);
+  };
+
+   const handlerDefineActionPlace = (id) => {
+    defineActionPlace(id);
+    defineActionType(DefineActionInControlAccommodationTipes.DEFECTO)
+  };
+
+    const handlerDefineService = (id) => {
+    defineActionService(id);
+     defineActionType(DefineActionInControlAccommodationTipes.DEFECTO)
+     defineActionPlace(DefineActionInControlAccommodationPlace.DEFECTO)
+    
+   
   };
 
   return (
     <aside className={styles.aside_container}>
-      <h3 className={styles.panel_title}>Control de alojamiento</h3>
+      <h3 className={styles.panel_title}>Tipos de alojamientos</h3>
       <ul className={styles.list_container}>
         <li
           onClick={() =>
-            handlerDefineAction(DefineActionInControlAccommodation.NEW)
+            handlerDefineActionType(DefineActionInControlAccommodationTipes.NEW)
           }
         >
           <AddIcon /> Crear nuevo
         </li>
         <li
           onClick={() =>
-            handlerDefineAction(DefineActionInControlAccommodation.VIEW)
+            handlerDefineActionType(DefineActionInControlAccommodationTipes.VIEW)
           }
         >
           <ListIcon />
@@ -28,7 +42,7 @@ const AsideAdmin = ({ defineAction }) => {
         </li>
         <li
           onClick={() =>
-            handlerDefineAction(DefineActionInControlAccommodation.EDIT)
+            handlerDefineActionType(DefineActionInControlAccommodationTipes.EDIT)
           }
         >
           <EditIcon />
@@ -36,7 +50,59 @@ const AsideAdmin = ({ defineAction }) => {
         </li>
         <li
           onClick={() =>
-            handlerDefineAction(DefineActionInControlAccommodation.DELETE)
+            handlerDefineActionType(DefineActionInControlAccommodationTipes.DELETE)
+          }
+        >
+          <DeleteIcon />
+          Eliminar
+        </li>
+      </ul>
+       <h3 className={styles.panel_title}>Alojamientos</h3>
+      <ul className={styles.list_container}>
+        <li
+          onClick={() =>
+            handlerDefineActionPlace(DefineActionInControlAccommodationPlace.NEW)
+          }
+        >
+          <AddIcon /> Crear alojamiento
+        </li>
+        <li
+          onClick={() =>
+            handlerDefineActionPlace(DefineActionInControlAccommodationPlace.VIEW)
+          }
+        >
+          <ListIcon />
+          Ver alojamientos
+        </li>
+      </ul>
+       <h3 className={styles.panel_title}>Servicios</h3>
+      <ul className={styles.list_container}>
+        <li
+          onClick={() =>
+            handlerDefineService(DefineActionServices.NEW)
+          }
+        >
+          <AddIcon /> Crear nuevo
+        </li>
+        <li
+          onClick={() =>
+            handlerDefineService(DefineActionServices.VIEW)
+          }
+        >
+          <ListIcon />
+          Ver todos
+        </li>
+        <li
+          onClick={() =>
+            handlerDefineService(DefineActionServices.EDIT)
+          }
+        >
+          <EditIcon />
+          Editar
+        </li>
+        <li
+          onClick={() =>
+            handlerDefineService(DefineActionServices.DELETE)
           }
         >
           <DeleteIcon />

@@ -1,27 +1,37 @@
-import { DefineActionInControlAccommodation } from "../../../enums/defineAdminAction.enum";
-import AddNewType from "./actions/AddNewType";
-import DEfaultAction from "./actions/DEfaultAction";
-import DeleteOneType from "./actions/DeleteOneType";
-import PutOneType from "./actions/PutOneType";
-import ViewAllTypes from "./actions/ViewAllTypes";
+import { DefineActionInControlAccommodationTipes, DefineActionInControlAccommodationPlace, DefineActionServices } from "../../../enums/defineAdminAction.enum";
+import { AddNewPlace, AddNewService, AddNewType, DefaultAction, DeleteOneService, DeleteOneType, PutOneService, PutOneType, ViewAllPlaces, ViewAllServices, ViewAllTypes } from "./actions";
+
 import styles from "./components.module.css";
 
-const MainAdmin = ({ actionView }) => {
+const MainAdmin = ({ actionViewType, actionViewPlace, avtionService }) => {
   return (
-    <section className={styles.admin_actions_container}>
-      {actionView === DefineActionInControlAccommodation.VIEW ? (
+     <section className={styles.admin_actions_container}>
+      {actionViewType === DefineActionInControlAccommodationTipes.VIEW ? (
         <ViewAllTypes />
-      ) : actionView === DefineActionInControlAccommodation.NEW ? (
+      ) : actionViewType === DefineActionInControlAccommodationTipes.NEW ? (
         <AddNewType />
-      ) : actionView === DefineActionInControlAccommodation.EDIT ? (
+      ) : actionViewType === DefineActionInControlAccommodationTipes.EDIT ? (
         <PutOneType />
-      ) : actionView === DefineActionInControlAccommodation.DELETE ? (
+      ) : actionViewType === DefineActionInControlAccommodationTipes.DELETE ? (
         <DeleteOneType />
+      ) : actionViewPlace === DefineActionInControlAccommodationPlace.NEW ? (
+        <AddNewPlace />
+      ) : actionViewPlace === DefineActionInControlAccommodationPlace.VIEW ? (
+        <ViewAllPlaces />
+      ) : avtionService === DefineActionServices.NEW ? (
+        <AddNewService />
+      ) : avtionService === DefineActionServices.EDIT ? (
+        <PutOneService />
+      ) : avtionService === DefineActionServices.DELETE ? (
+        <DeleteOneService />
+      ) : avtionService === DefineActionServices.VIEW ? (
+        <ViewAllServices />
       ) : (
-        <DEfaultAction />
+        <DefaultAction />
       )}
     </section>
   );
 };
+
 
 export default MainAdmin;

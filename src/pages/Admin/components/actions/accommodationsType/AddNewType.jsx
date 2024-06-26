@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getAllTypesAccommodations } from "../../../../services/tiposDeAlojamientos/getAll.tiposDeAlojamientos.services";
-import { createNewTypesAccommodations } from "../../../../services/tiposDeAlojamientos/add.tipoDeAlojamiento.js";
-import { ButtonAction, InputTextValues } from "../../../../components";
+import { getAllTypesAccommodations } from "../../../../../services/tiposDeAlojamientos/getAll.tiposDeAlojamientos.services";
+import { createNewTypesAccommodations } from "../../../../../services/tiposDeAlojamientos/add.tipoDeAlojamiento.js";
+import { ButtonAction, InputTextValues } from "../../../../../components";
 import swal from "sweetalert2";
-import styles from "./../components.module.css";
+import styles from "./../../components.module.css";
 
 const AddNewType = () => {
   const [accomodationsOptions, setAccomodationsOptions] = useState([]);

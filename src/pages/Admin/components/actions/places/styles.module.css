@@ -1,0 +1,82 @@
+.all_cardsmall_container {
+  display: grid;
+  grid-template-columns: 48% 48%;
+  gap: 120x;
+  align-items: center;
+  width: 100%;
+  margin: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+}
+
+
+
+.cardsmall_container{
+    border-radius: 12px;
+    border: 1px solid rgb(197, 197, 197);
+    width: 420px;
+    height: 150px;
+    box-shadow: 0px 17px 22px 6px rgba(78, 78, 78, 0.1);
+    margin: 10px;
+    padding: 12px;
+
+}
+
+.cardsmall_container:hover {
+  border: 1px solid var(--main-color-dark);
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+
+.cardsmall_cover_container{
+    width: 100px;
+}
+
+.cardsmall_cover_image {
+  width: 90PX;
+  height: 90PX;
+  border-radius: 12px;
+  object-fit: cover;
+  display: flex;
+}
+
+.display_text_horizontal {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  vertical-align: middle;
+  justify-content: flex-start;
+  
+}
+
+.all_results_values {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+
+}
+
+.paginate_container {
+  display: flex;
+  flex-direction: row;
+
+}
+
+
+.currentPageStyles {
+  display: flex;
+  width: 90px;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px;
+  margin: 4px;
+  border-radius: 12px;
+  border: 1px solid rgb(197, 197, 197);
+}

@@ -12,6 +12,8 @@ const HeroHome = ({
   setNumberOfRooms,
   accommodationType,
   setAccommodationType,
+  setPriceRange,
+  priceRange
 }) => {
   const [accomodationsOptions, setAccomodationsOptions] = useState([]);
 
@@ -53,10 +55,19 @@ const HeroHome = ({
     { value: 6, label: "6 habitaciones" },
   ];
 
+ const priceRangesOptions = [
+    { value: [1200, 2000], label: "$1200 - $2000" },
+    { value: [60, 200], label: "$60 - $200" },
+    { value: [200, 400], label: "$200 - $400" },
+    { value: [400, 800], label: "$400 - $800" },
+    { value: [800, 1200], label: "$800 - $1200" },
+  ];
+
   const clearFilters = () => {
     setNumberOfBathrooms(null);
     setNumberOfRooms(null);
     setAccommodationType(null);
+    setPriceRange(null)
   };
 
   return (
@@ -93,6 +104,15 @@ const HeroHome = ({
           defaultMessage="Tipo de alojamiento"
           className={styles.select_container}
         />
+         <SelectValues
+          key={"priceRange"}
+          name="priceRange"
+          value={priceRange}
+          changevalue={setPriceRange}
+          options={priceRangesOptions}
+          defaultMessage="Rango de precios"
+          className={styles.select_container}
+        />
         <ButtonAction message="Limpiar filtros" actionHandler={clearFilters} />
       </section>
     </div>
@@ -107,6 +127,8 @@ HeroHome.propTypes = {
   setNumberOfRooms: PropTypes.func,
   accommodationType: PropTypes.number | null,
   setAccommodationType: PropTypes.func,
+   priceRange: PropTypes.array,
+  setPriceRange: PropTypes.func,
 };
 
 export default HeroHome;

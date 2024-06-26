@@ -46,7 +46,7 @@ const AdminAuth = ({ actionState }) => {
         />
       </figure>
       <div className={styles.inputs_container_auth}>
-        <h3 className={styles.title_auth}>Accseso de Admins</h3>
+        <h3 className={styles.title_auth}> IDW - Administradores</h3>
 
         <p className={styles.title_auth_describe}>
           Ingresa tus credenciales para gestionar la plataforma.

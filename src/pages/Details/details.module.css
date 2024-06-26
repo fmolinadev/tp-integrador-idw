@@ -40,7 +40,7 @@
 
 .details_title {
   font-family: "Inter", sans-serif;
-  font-size: 35px;
+  font-size: 25px;
   font-weight: 400;
   padding-bottom: 12px;
 }
@@ -53,12 +53,24 @@
 }
 
 .details_text_container_placement {
-  width: 310px;
+  width: 510px;
 }
 
 .details_text_horizontal p {
   font-family: "Inter", sans-serif;
-  font-size: 23px;
+  font-size: 18px;
   font-weight: 300;
   padding-bottom: 12px;
+}
+
+.container_result{
+  display: inline-flex;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+
+.text_service{
+  width: 100%;
+  font-size: 14px;
+  padding-right: 10px;
 }

@@ -72,3 +72,27 @@
   color: black;
   border-color: transparent;
 }
+
+.paginate_container {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+
+}
+
+.currentPageStyles {
+  display: flex;
+  width: 90px;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px;
+  margin: 4px;
+  border-radius: 12px;
+  border: 1px solid rgb(197, 197, 197);
+}

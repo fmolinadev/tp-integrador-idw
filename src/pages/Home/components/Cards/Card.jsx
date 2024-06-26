@@ -15,7 +15,7 @@ const Card = ({ dataCard }) => {
       <figure className={styles.card_cover_container}>
         <img
           className={styles.card_cover_image}
-          src={PlaceholderPicture}
+          src={dataCard.Imagen !== null? dataCard.Imagen : PlaceholderPicture}
           alt="pictures"
         />
       </figure>

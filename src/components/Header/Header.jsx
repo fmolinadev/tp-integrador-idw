@@ -15,7 +15,7 @@ const Header = () => {
     <header className={header_container_main}>
       <div className={header_container_section}>
         <Link to={ROUTES_PATHS.home}>
-          <span className={header_branding}>BookingIDW</span>
+          <span className={header_branding}> IDW - Checkin</span>
         </Link>
 
         <nav className={header_navbar_container}>

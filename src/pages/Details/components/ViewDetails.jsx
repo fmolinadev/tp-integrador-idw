@@ -9,7 +9,7 @@ const ViewDetails = ({ details }) => {
     <div className={styles.details_view_container}>
       {details !== null ? (
         <>
-          <ImageContainer />
+          <ImageContainer image={details.Imagen}/>
           <TextDetailsContainer details={details} />
         </>
       ) : (
